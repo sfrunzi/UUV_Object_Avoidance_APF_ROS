@@ -42,50 +42,50 @@ class apfAlgorithmNode:
         return obstacles
 
     def calculate_potential_fields(self, cloud, obstacles):
-    if self.current_position is None:
-        return
+        if self.current_position is None:
+            return
 
-    kO = 0.1
-    kG = 5
+        kO = 0.1
+        kG = 5
 
-    qR = 1
-    qO = 1
-    qG = -1
+        qR = 1
+        qO = 1
+        qG = -1
 
-    # Calculate distance to goal
-    distance_to_goal = geopy.distance.distance(self.current_position, self.goal_position).meters
+        # Calculate distance to goal
+        distance_to_goal = geopy.distance.distance(self.current_position, self.goal_position).meters
 
-    # Calculate direction to goal
-    direction_to_goal = np.arctan2(self.goal_position[1] - self.current_position[1], self.goal_position[0] - self.current_position[0])
+        # Calculate direction to goal
+        direction_to_goal = np.arctan2(self.goal_position[1] - self.current_position[1], self.goal_position[0] - self.current_position[0])
 
-    # Calculate distance to obstacles
-    obstacle_distances = []
-    for obstacle in obstacles:
-        distance_to_obstacle = np.sqrt((self.current_position[0] - obstacle[0])**2 + (self.current_position[1] - obstacle[1])**2)
-        obstacle_distances.append(distance_to_obstacle)
+        # Calculate distance to obstacles
+        obstacle_distances = []
+        for obstacle in obstacles:
+            distance_to_obstacle = np.sqrt((self.current_position[0] - obstacle[0])**2 + (self.current_position[1] - obstacle[1])**2)
+            obstacle_distances.append(distance_to_obstacle)
 
-    # Calculate attractive force
-    att = np.array([kG * (self.goal_position[0] - self.current_position[0]), kG * (self.goal_position[1] - self.current_position[1])])
+        # Calculate attractive force
+        att = np.array([kG * (self.goal_position[0] - self.current_position[0]), kG * (self.goal_position[1] - self.current_position[1])])
 
-    # Calculate repulsive forces
-    rep = np.zeros(2)
-    for obstacle, distance_to_obstacle in zip(obstacles, obstacle_distances):
-        if distance_to_obstacle < 1.0:  # Consider obstacles within 1 meter
-            rep += kO * (np.array([self.current_position[0] - obstacle[0], self.current_position[1] - obstacle[1]]) / distance_to_obstacle**2)
+        # Calculate repulsive forces
+        rep = np.zeros(2)
+        for obstacle, distance_to_obstacle in zip(obstacles, obstacle_distances):
+            if distance_to_obstacle < 1.0:  # Consider obstacles within 1 meter
+                rep += kO * (np.array([self.current_position[0] - obstacle[0], self.current_position[1] - obstacle[1]]) / distance_to_obstacle**2)
 
-    # Calculate resultant force
-    F = att + rep
+        # Calculate resultant force
+        F = att + rep
 
-    # Calculate direction of the resultant force
-    direction_of_force = np.arctan2(F[1], F[0])
+        # Calculate direction of the resultant force
+        direction_of_force = np.arctan2(F[1], F[0])
 
-    # Calculate velocity command
-    velocity_cmd = Twist()
-    velocity_cmd.linear.x = np.linalg.norm(F)  # Set linear velocity proportional to the magnitude of the force
-    velocity_cmd.angular.z = direction_of_force - direction_to_goal  # Set angular velocity based on the direction of the force
+        # Calculate velocity command
+        velocity_cmd = Twist()
+        velocity_cmd.linear.x = np.linalg.norm(F)  # Set linear velocity proportional to the magnitude of the force
+        velocity_cmd.angular.z = direction_of_force - direction_to_goal  # Set angular velocity based on the direction of the force
 
-    # Publish the velocity command
-    self.velocity_pub.publish(velocity_cmd)
+        # Publish the velocity command
+        self.velocity_pub.publish(velocity_cmd)
 
     def run(self):
         while not rospy.is_shutdown():
