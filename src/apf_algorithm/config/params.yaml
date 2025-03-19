@@ -1,0 +1,15 @@
+potential_field_weights: 
+  attractive: 1.0
+  repulsive: 5.0
+
+distance_thresholds:
+  close: 0.5
+  medium: 1.0
+  far: 2.0
+
+max_velocity: 0.5
+min_velocity: 0.1
+angular_velocity: 1.0
+
+sensor_frame: "camera_link"
+base_frame: "base_link"

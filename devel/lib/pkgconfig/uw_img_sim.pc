@@ -1,0 +1,8 @@
+prefix=/home/saf359/catkin_ws/devel
+
+Name: uw_img_sim
+Description: Description of uw_img_sim
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib -luw_img_sim
+Requires: rospy

@@ -1,0 +1,87 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 70
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options
+      Splitter Ratio: 0.5
+    Tree Height: 149
+  - Class: rviz/Views
+    Expanded:
+      - /Current View
+    Name: Views
+    Splitter Ratio: 0.5
+Preferences:
+  PromptSaveOnExit: true
+Toolbars:
+  toolButtonStyle: 2
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz/Image
+      Enabled: true
+      Name: Camera Image
+      Topic: /bluerov2/camera_image
+      Transport Hint: raw
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Default Light: true
+    Fixed Frame: base_link
+    Frame Rate: 30
+  Name: root
+  Tools: ~
+  Value: true
+  Views:
+    Current:
+      Class: rviz/FPS
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.05999999865889549
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.009999999776482582
+      Pitch: 2.1862759590148926
+      Position:
+        X: 5
+        Y: 5
+        Z: 10
+      Roll: -3.141592502593994
+      Target Frame: base_link
+      Yaw: 0.7853981852531433
+    Saved:
+      - Class: rviz/Orbit
+        Distance: 10
+        Enable Stereo Rendering:
+          Stereo Eye Separation: 0.05999999865889549
+          Stereo Focal Distance: 1
+          Swap Stereo Eyes: false
+          Value: false
+        Field of View: 0.7853981852531433
+        Focal Point:
+          X: 0
+          Y: 0
+          Z: 0
+        Focal Shape Fixed Size: true
+        Focal Shape Size: 0.05000000074505806
+        Invert Z Axis: false
+        Name: Orbit
+        Near Clip Distance: 0.009999999776482582
+        Pitch: 0.7853981852531433
+        Target Frame: base_link
+        Yaw: 0.7853981852531433
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 1107
+  Hide Left Dock: false
+  Hide Right Dock: false
+  QMainWindow State: 000000ff00000000fd000000010000000000000156000003fdfc0200000004fb000000100044006900730070006c006100790073010000003b00000116000000c700fffffffb0000000a005600690065007700730100000157000000df000000a000fffffffb000000100044006900730070006c006100790073010000023c00000116000000c700fffffffb0000000a005600690065007700730100000358000000e0000000a000ffffff00000618000003fd00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Views:
+    collapsed: false
+  Width: 1908
+  X: 0
+  Y: 0

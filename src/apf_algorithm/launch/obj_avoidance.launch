@@ -1,0 +1,22 @@
+<launch>
+    <!-- Launch Gazebo Lake World -->
+    <include file="$(find uuv_gazebo_worlds)/launch/lake.launch"/>
+
+    <!-- Launch BlueROV2 with Camera (No Image Filtering)-->
+    <include file="$(find bluerov2_description)/launch/upload_bluerov2.launch"/>
+
+    <!-- Launch the cam_to_cloud node -->
+    <node name="underwater_camera_node" pkg="apf_algorithm" type="cam_to_cloud.py" output="screen">
+        <param name="param_file" value="$(find apf_algorithm)/config/params.yaml"/>
+    </node>
+
+    <!-- Launch the obstacle avoidance node -->
+    <node name="apf_algorithm_node" pkg="apf_algorithm" type="apf.py" output="screen">
+        <param name="param_file" value="$(find apf_algorithm)/config/params.yaml"/>
+        <remap from="/camera/depth/points" to="/underwater_camera/point_cloud"/>
+        <remap from="/cmd_vel" to="/robot/cmd_vel"/>
+    </node>
+
+    <!-- Launch RViz -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find apf_algorithm)/rviz/rviz_camera.rviz" />
+</launch>
